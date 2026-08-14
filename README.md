@@ -119,16 +119,31 @@ Model credentials required for whichever provider you enable (Bedrock, Gemini, o
 
 ## Author
 
-**NagaVenkatesh Arigala** — AI/GenAI Engineer
-[LinkedIn](https://www.linkedin.com/in/nv-arigala0801/) · [GitHub](https://github.com/Venki0987)
+**NagaVenkatesh Arigala** — AI/GenAI Engineer, Chennai, India
+
+- Email: [arigalanagavenkatesh@gmail.com](mailto:arigalanagavenkatesh@gmail.com)
+- Phone / WhatsApp: [+91 79890 06929](tel:+917989006929)
+- LinkedIn: [nv-arigala0801](https://www.linkedin.com/in/nv-arigala0801/)
+- GitHub: [Venki0987](https://github.com/Venki0987)
 
 
 ---
 
-## 📂 About this repository
+## Source code access
 
-This is a **documentation and architecture showcase**. It covers the problem, the system design, the agent topology, and the engineering decisions behind the project.
+This repository is a **documentation and architecture showcase**. It covers the problem, the
+system design, the agent topology, and the engineering decisions behind the project.
 
-**The source code is held in a private repository.** I'm glad to walk through the implementation in a technical conversation or screen-share — reach out via the links below.
+**The full source code is in a private repository.** If you want to see it, just ask — I am happy to
+grant read access, walk through the implementation, or screen-share a live demo. Fastest ways to
+reach me:
+
+| | |
+|---|---|
+| Email | [arigalanagavenkatesh@gmail.com](mailto:arigalanagavenkatesh@gmail.com) |
+| Phone / WhatsApp | [+91 79890 06929](tel:+917989006929) |
+| LinkedIn | [nv-arigala0801](https://www.linkedin.com/in/nv-arigala0801/) |
+
+I usually reply the same day.
 
 All rights reserved — see [LICENSE](LICENSE).
