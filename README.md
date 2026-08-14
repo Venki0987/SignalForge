@@ -83,21 +83,21 @@ This repo ships **15 design documents** under [`docs/`](docs/) — written befor
 
 | Doc | Covers |
 |-----|--------|
-| [`00-langgraph-architecture`](docs/00-langgraph-architecture) | Graph topology, node contracts, state shape |
-| [`01-ingestion-and-triggering`](docs/01-ingestion-and-triggering) | Scheduled vs event-driven entry points |
-| [`02-deduplication`](docs/02-deduplication) | Similarity thresholds, canonicalisation strategy |
-| [`03-filtering`](docs/03-filtering) | Relevance scoring and cutoffs |
-| [`04-classification-and-routing`](docs/04-classification-and-routing) | Topic taxonomy, conditional routing |
-| [`05-enrichment`](docs/05-enrichment) | Full-text extraction, context assembly |
-| [`06-generation`](docs/06-generation) | Prompt design, output structure |
-| [`07-verification-loop`](docs/07-verification-loop) | Groundedness checks, retry semantics |
-| [`08-human-oversight`](docs/08-human-oversight) | Approval gates, override paths |
-| [`09-storage`](docs/09-storage) | Persistence model |
-| [`10-delivery-and-interaction`](docs/10-delivery-and-interaction) | Send pipeline, archive chat |
-| [`11-observability`](docs/11-observability) | Tracing, metrics, what gets logged |
-| [`12-guardrails`](docs/12-guardrails) | Input/output safety controls |
-| [`12-failure-points-and-fallbacks`](docs/12-failure-points-and-fallbacks) | Every failure mode and its fallback |
-| [`13-state`](docs/13-state) | State transitions across the graph |
+| [`00-langgraph-architecture`](docs/00-langgraph-architecture.md) | Graph topology, node contracts, state shape |
+| [`01-ingestion-and-triggering`](docs/01-ingestion-and-triggering.md) | Scheduled vs event-driven entry points |
+| [`02-deduplication`](docs/02-deduplication.md) | Similarity thresholds, canonicalisation strategy |
+| [`03-filtering`](docs/03-filtering.md) | Relevance scoring and cutoffs |
+| [`04-classification-and-routing`](docs/04-classification-and-routing.md) | Topic taxonomy, conditional routing |
+| [`05-enrichment`](docs/05-enrichment.md) | Full-text extraction, context assembly |
+| [`06-generation`](docs/06-generation.md) | Prompt design, output structure |
+| [`07-verification-loop`](docs/07-verification-loop.md) | Groundedness checks, retry semantics |
+| [`08-human-oversight`](docs/08-human-oversight.md) | Approval gates, override paths |
+| [`09-storage`](docs/09-storage.md) | Persistence model |
+| [`10-delivery-and-interaction`](docs/10-delivery-and-interaction.md) | Send pipeline, archive chat |
+| [`11-observability`](docs/11-observability.md) | Tracing, metrics, what gets logged |
+| [`12-guardrails`](docs/12-guardrails.md) | Input/output safety controls |
+| [`12-failure-points-and-fallbacks`](docs/12-failure-points-and-fallbacks.md) | Every failure mode and its fallback |
+| [`13-state`](docs/13-state.md) | State transitions across the graph |
 
 ## Engineering Notes
 
@@ -122,9 +122,6 @@ Model credentials required for whichever provider you enable (Bedrock, Gemini, o
 **NagaVenkatesh Arigala** — AI/GenAI Engineer
 [LinkedIn](https://www.linkedin.com/in/nv-arigala0801/) · [GitHub](https://github.com/Venki0987)
 
-## License
-
-MIT — see [LICENSE](LICENSE).
 
 ---
 
