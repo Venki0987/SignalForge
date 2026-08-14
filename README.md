@@ -1,6 +1,6 @@
-﻿# SignalForge
+# SignalForge
 
-**An autonomous research-to-newsletter pipeline built on LangGraph.** Ingests from RSS and the open web, deduplicates, classifies, enriches, drafts, self-verifies, and delivers â€” with human-in-the-loop approval gates and a full guardrail layer.
+**An autonomous research-to-newsletter pipeline built on LangGraph.** Ingests from RSS and the open web, deduplicates, classifies, enriches, drafts, self-verifies, and delivers — with human-in-the-loop approval gates and a full guardrail layer.
 
 Built as a study in *production* agentic architecture: not a demo chain, but a stateful graph with explicit failure modes, fallbacks, and observability.
 
@@ -8,50 +8,50 @@ Built as a study in *production* agentic architecture: not a demo chain, but a s
 
 ## Why this exists
 
-Most "AI newsletter" projects are a single LLM call wrapped in a cron job. They break silently, hallucinate confidently, and duplicate content. SignalForge treats the pipeline as a **distributed system with an LLM in it** â€” every stage has a defined contract, a failure mode, and a fallback.
+Most "AI newsletter" projects are a single LLM call wrapped in a cron job. They break silently, hallucinate confidently, and duplicate content. SignalForge treats the pipeline as a **distributed system with an LLM in it** — every stage has a defined contract, a failure mode, and a fallback.
 
 ## Architecture
 
 ```
-                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-   RSS / Web / PDF  â”€â”€â”€â”€â”€â”€â–º   Ingestion      â”‚  scheduled + event triggers
-                          â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                                   â–¼
-                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                          â”‚  Deduplication   â”‚  embedding similarity + URL canonicalisation
-                          â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                                   â–¼
-                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                          â”‚    Filtering     â”‚  relevance threshold, drops low-signal items
-                          â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                                   â–¼
-                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                          â”‚  Classification  â”‚  topic routing â†’ downstream specialist
-                          â”‚   and Routing    â”‚
-                          â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                                   â–¼
-                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                          â”‚    Enrichment    â”‚  full-text fetch, context gathering
-                          â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                                   â–¼
-                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                          â”‚    Generation    â”‚  drafting agent
-                          â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                                   â–¼
-                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                          â”‚ Verification     â”‚â—„â”€â”  groundedness check
-                          â”‚      Loop        â”‚  â”‚  retry on failure
-                          â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜â”€â”€â”˜
-                                   â–¼
-                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                          â”‚ Human Oversight  â”‚  approval gate before send
-                          â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                                   â–¼
-                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                          â”‚    Delivery      â”‚  + interactive chatbot over archive
-                          â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                          ┌──────────────────┐
+   RSS / Web / PDF  ──────►   Ingestion      │  scheduled + event triggers
+                          └────────┬─────────┘
+                                   ▼
+                          ┌──────────────────┐
+                          │  Deduplication   │  embedding similarity + URL canonicalisation
+                          └────────┬─────────┘
+                                   ▼
+                          ┌──────────────────┐
+                          │    Filtering     │  relevance threshold, drops low-signal items
+                          └────────┬─────────┘
+                                   ▼
+                          ┌──────────────────┐
+                          │  Classification  │  topic routing → downstream specialist
+                          │   and Routing    │
+                          └────────┬─────────┘
+                                   ▼
+                          ┌──────────────────┐
+                          │    Enrichment    │  full-text fetch, context gathering
+                          └────────┬─────────┘
+                                   ▼
+                          ┌──────────────────┐
+                          │    Generation    │  drafting agent
+                          └────────┬─────────┘
+                                   ▼
+                          ┌──────────────────┐
+                          │ Verification     │◄─┐  groundedness check
+                          │      Loop        │  │  retry on failure
+                          └────────┬─────────┘──┘
+                                   ▼
+                          ┌──────────────────┐
+                          │ Human Oversight  │  approval gate before send
+                          └────────┬─────────┘
+                                   ▼
+                          ┌──────────────────┐
+                          │    Delivery      │  + interactive chatbot over archive
+                          └──────────────────┘
 
-        Cross-cutting: Guardrails Â· State Management Â· Observability Â· Fallbacks
+        Cross-cutting: Guardrails · State Management · Observability · Fallbacks
 ```
 
 ## Agents
@@ -79,7 +79,7 @@ Most "AI newsletter" projects are a single LLM call wrapped in a cron job. They 
 
 ## Design Documentation
 
-This repo ships **15 design documents** under [`docs/`](docs/) â€” written before and alongside the implementation:
+This repo ships **15 design documents** under [`docs/`](docs/) — written before and alongside the implementation:
 
 | Doc | Covers |
 |-----|--------|
@@ -101,10 +101,10 @@ This repo ships **15 design documents** under [`docs/`](docs/) â€” written 
 
 ## Engineering Notes
 
-- **Dedup runs before enrichment** â€” rejecting duplicates early avoids paying for full-text fetch and LLM tokens on content already covered.
-- **The verification loop is a cycle, not a check** â€” the reviewer agent can send work back to generation with feedback, bounded by a retry ceiling to prevent infinite loops.
-- **Human oversight is a graph node, not a wrapper** â€” approval state lives in the graph, so a rejected issue resumes at the right stage instead of restarting.
-- **Every stage has a documented fallback** â€” see `12-failure-points-and-fallbacks`. Model unavailability, empty retrieval, and extraction failure all degrade rather than crash.
+- **Dedup runs before enrichment** — rejecting duplicates early avoids paying for full-text fetch and LLM tokens on content already covered.
+- **The verification loop is a cycle, not a check** — the reviewer agent can send work back to generation with feedback, bounded by a retry ceiling to prevent infinite loops.
+- **Human oversight is a graph node, not a wrapper** — approval state lives in the graph, so a rejected issue resumes at the right stage instead of restarting.
+- **Every stage has a documented fallback** — see `12-failure-points-and-fallbacks`. Model unavailability, empty retrieval, and extraction failure all degrade rather than crash.
 
 ## Getting Started
 
@@ -119,12 +119,12 @@ Model credentials required for whichever provider you enable (Bedrock, Gemini, o
 
 ## Author
 
-**NagaVenkatesh Arigala** â€” AI/GenAI Engineer
-[LinkedIn](https://www.linkedin.com/in/nv-arigala0801/) Â· [GitHub](https://github.com/Venki0987)
+**NagaVenkatesh Arigala** — AI/GenAI Engineer
+[LinkedIn](https://www.linkedin.com/in/nv-arigala0801/) · [GitHub](https://github.com/Venki0987)
 
 ## License
 
-MIT â€” see [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE).
 
 ---
 
